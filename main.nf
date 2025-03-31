@@ -41,10 +41,6 @@ process minimap {
     minimap2 -ax map-ont -t $params.cpus assembly.fasta reads.fq.gz > minimap.bam
     """
 
-    stub:
-    """
-    
-    """
 }
 
 process samtools {
@@ -62,10 +58,6 @@ process samtools {
     samtools index reads_to_draft.bam
     """
 
-    stub:
-    """
-    
-    """
 }
 
 
@@ -84,10 +76,6 @@ process medaka {
     medaka_consensus -i reads_to_draft.bam -d assembly.fasta -o assembly_polished -t $params.cpus
     """
 
-    stub:
-    """
-    
-    """
 }
 
 
@@ -105,10 +93,6 @@ process augustus {
     augustus --species=aspergillus_oryzae --strand=both --genemodel=partial --gff3=on consensus.fasta > gene_calling.gff3
     """
 
-    stub:
-    """
-    
-    """
 }
 
 
