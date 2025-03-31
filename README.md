@@ -7,7 +7,7 @@ Pipeline assembly to gene calling with:
 * medaka
 * augustus
 
-testing set up with aspergillus oryzae,
+testing set up with _aspergillus oryzae_,
  currently only takes the following input parameters:
 
  input: *.fastq.gz file
