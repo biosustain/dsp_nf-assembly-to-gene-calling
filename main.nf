@@ -8,6 +8,13 @@
 
 //input: *.fq.gz file
 
+//default params:
+params.threads = 16 //could be set to task.cpus, but seems to default at 1
+params.input = 'reads.fq.gz'
+params.outdir = 'output'
+params.species = 'aspergillus_oryzae'
+params.genome_size = '37m' // 37 megabases for Aspergillus oryzae
+params.assembly_coverage = 30
 
 
 process flye {
@@ -18,9 +25,10 @@ process flye {
         path 'output/assembly.fasta', emit: fasta
         path 'output/flye.log'
         path 'output/assembly_info.txt'
+        path 'output/*'
     script:
     """
-    flye --nano-hq reads.fq.gz  --out-dir ./output/ --genome-size 37m  --threads $params.cpus --asm-coverage 30
+    flye --nano-hq reads.fq.gz  --out-dir ./output/ --genome-size $params.genome_size  --threads $params.threads --asm-coverage $params.assembly_coverage
     """
 }
 
@@ -38,7 +46,7 @@ process minimap {
         path 'minimap.bam'
     script:
     """
-    minimap2 -ax map-ont -t $params.cpus assembly.fasta reads.fq.gz > minimap.bam
+    minimap2 -ax map-ont -t $params.threads assembly.fasta reads.fq.gz > minimap.bam
     """
 
 }
@@ -73,7 +81,7 @@ process medaka {
 
     script:
     """
-    medaka_consensus -i reads_to_draft.bam -d assembly.fasta -o assembly_polished -t $params.cpus
+    medaka_consensus -i reads_to_draft.bam -d assembly.fasta -o assembly_polished -t $params.threads
     """
 
 }
@@ -90,7 +98,7 @@ process augustus {
 
     script:
     """
-    augustus --species=aspergillus_oryzae --strand=both --genemodel=partial --gff3=on consensus.fasta > gene_calling.gff3
+    augustus --species=${params.species} --strand=both --genemodel=partial --gff3=on consensus.fasta > gene_calling.gff3
     """
 
 }
