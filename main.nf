@@ -25,7 +25,7 @@ process flye {
         path 'output/assembly.fasta', emit: fasta
         path 'output/flye.log'
         path 'output/assembly_info.txt'
-        path 'output/*'
+        path 'output/*' // this ensures that all files in the output directory are included in the work subdirectory when the process is run on azure batch.
     script:
     """
     flye --nano-hq reads.fq.gz  --out-dir ./output/ --genome-size $params.genome_size  --threads $params.threads --asm-coverage $params.assembly_coverage
@@ -43,7 +43,7 @@ process minimap {
         path 'assembly.fasta'
 
     output:
-        path 'minimap.bam'
+        path 'minimap.bam' 
     script:
     """
     minimap2 -ax map-ont -t $params.threads assembly.fasta reads.fq.gz > minimap.bam
@@ -71,13 +71,15 @@ process samtools {
 
 
 process medaka {
-    container 'quay.io/biocontainers/medaka:1.4.4--py38h130def0_0'
+    container 'quay.io/biocontainers/medaka:2.0.1--py311hfd2b166_0'
+
     input:
         path 'reads_to_draft.bam'
         path 'reads_to_draft.bam.bai'
         path 'assembly.fasta'
     output:
-        path 'assembly_polished/consensus.fasta'
+        path 'assembly_polished/consensus.fasta', emit: fasta
+        path 'assembly_polished/*' // this ensures that all files in the output directory are included in the work subdirectory when the process is run on azure batch.
 
     script:
     """
@@ -110,5 +112,6 @@ workflow{
     minimap(reads,flye.out.fasta)
     samtools(minimap.out)
     medaka(samtools.out.bam,samtools.out.bai,flye.out.fasta)
-    augustus(medaka.out)
+    augustus(medaka.out.fasta)
 }
+
