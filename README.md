@@ -16,3 +16,10 @@ testing set up with _aspergillus oryzae_,
 * species: species to be used by Augustus (lower case, underscore instead of space)
 * genome_size - for Flye
 * assembly_coverage - for Flye
+
+
+example to initiate run:
+
+```
+nextflow run https://github.com/biosustain/dsp_nf-assembly-to-gene-calling --input my_data.fq.gz --species aspergillus_oryzae --genome_size 37m --assembly_coverage 30 --cpus 16 -resume
+```
