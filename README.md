@@ -1,13 +1,14 @@
 # dsp_nf-assembly-to-gene-calling
 
-Pipeline assembly to gene calling with:
-* Flye
-* minimap2
-* samtools
-* medaka
-* augustus
+This pipeline can take sequencing data from Oxford Nanopore Technologies (fastq or gzipped fastq) and conduct required steps in order to attain gene prediction as a gff3 file.
 
-testing set up with _aspergillus oryzae_,
+The pipeline relies on the following software that have been integrated in this nextflow pipeline:
+* Flye - _de novo_ assembler for single-molecule sequencing reads - https://github.com/mikolmogorov/Flye
+* minimap2 - Aligning reads to assembly - https://github.com/lh3/minimap2
+* samtools - Sorting and indexing BAM - https://github.com/samtools/samtools
+* medaka - Polishing (consensus sequence) - https://github.com/nanoporetech/medaka
+* augustus - Gene prediction - https://github.com/Gaius-Augustus/Augustus
+
  currently only takes the following input parameters:
 
 * input: *.fastq.gz file
