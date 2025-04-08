@@ -113,8 +113,8 @@ nextflow.enable.dsl=2
 
 workflow{
     log.info """\
-        ASSEMBLY TO GENE CALLING  NF PIPELINE
-        =====================================
+        ASSEMBLY TO GENE CALLING - DSP NF PIPELINE
+        ==========================================
         species            : ${params.species}
         genome size        : ${params.genome_size}
         assembly coverage  : ${params.assembly_coverage}
