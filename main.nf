@@ -105,9 +105,25 @@ process augustus {
         augustus --species=${params.species} --strand=both --genemodel=partial --gff3=on consensus.fasta > gene_calling.gff3
         """
 }
-// more lines of Augustus code to get more files with extra content if we want to expand the pipeline
+
+/*
+ * Workflow Definition
+ */
+nextflow.enable.dsl=2
 
 workflow{
+    log.info """\
+        ASSEMBLY TO GENE CALLING  NF PIPELINE
+        =====================================
+        species            : ${params.species}
+        genome size        : ${params.genome_size}
+        assembly coverage  : ${params.assembly_coverage}
+        input              : ${params.input}
+        outdir             : ${params.outdir}
+        threads            : ${params.threads}
+        """
+        .stripIndent()
+
     reads= file(params.input)
     flye(reads)
     minimap(reads,flye.out.fasta)
