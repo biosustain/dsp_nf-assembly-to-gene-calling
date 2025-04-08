@@ -1,6 +1,6 @@
 # dsp_nf-assembly-to-gene-calling
 
-This pipeline can take sequencing data from Oxford Nanopore Technologies (fastq or gzipped fastq) and conduct required steps in order to attain gene prediction as a gff3 file.
+This nextflow pipeline can take sequencing data from Oxford Nanopore Technologies (fastq or gzipped fastq) and conduct required steps in order to attain gene prediction as a gff3 file.
 
 The pipeline relies on the following software that have been integrated in this nextflow pipeline:
 * Flye - _de novo_ assembler for single-molecule sequencing reads - https://github.com/mikolmogorov/Flye
