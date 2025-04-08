@@ -27,7 +27,7 @@ process flye {
         path 'output/assembly.fasta', emit: fasta
         path 'output/flye.log'
         path 'output/assembly_info.txt'
-        path 'output/*' // this ensures that all files in the output directory are included in the work subdirectory when the process is run on azure batch.
+        path 'output/assembly_graph.gfa'
     script:
         """
         flye --nano-hq reads.fq.gz  --out-dir ./output/ --genome-size $params.genome_size  --threads $params.threads --asm-coverage $params.assembly_coverage
@@ -83,7 +83,6 @@ process medaka {
         path 'assembly.fasta'
     output:
         path 'assembly_polished/consensus.fasta', emit: fasta
-        path 'assembly_polished/*' // this ensures that all files in the output directory are included in the work subdirectory when the process is run on azure batch.
     script:
         """
         medaka_consensus -i reads_to_draft.bam -d assembly.fasta -o assembly_polished -t $params.threads
