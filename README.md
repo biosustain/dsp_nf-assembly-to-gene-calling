@@ -22,5 +22,6 @@ The pipeline relies on the following software that have been integrated in this 
 example to initiate run:
 
 ```
-nextflow run https://github.com/biosustain/dsp_nf-assembly-to-gene-calling --input my_data.fq.gz --species aspergillus_oryzae --genome_size 37m --assembly_coverage 30 --threads 16 -resume
+nextflow run https://github.com/biosustain/dsp_nf-assembly-to-gene-calling --input my_data.fq.gz \
+--outdir results --species aspergillus_oryzae --genome_size 37m --assembly_coverage 30 --threads 16 -resume
 ```
