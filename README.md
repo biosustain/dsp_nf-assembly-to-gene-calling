@@ -26,4 +26,4 @@ nextflow run https://github.com/biosustain/dsp_nf-assembly-to-gene-calling --inp
 --outdir results --species aspergillus_oryzae --genome_size 37m --assembly_coverage 30 --threads 16 -resume
 ```
 
-Note: we ran a ~3gb fastq.gz file on an the Azure virtual machine: *Standard E16as v5 (16 vcpus, 128 GiB memory)*, whith 16 threads the total run time was just below 25 hours.
+Note: we ran a ~3gb fastq.gz file on an the Azure virtual machine: *Standard E16as v5 (16 vcpus, 128 GiB memory)*, with 16 threads the total run time was just below 25 hours.
